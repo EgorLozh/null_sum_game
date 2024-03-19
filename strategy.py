@@ -21,3 +21,6 @@ class CopyCat(Player):
 class Goofy(Player):
     def play(self):
         return random.choice([True, False])
+
+
+class

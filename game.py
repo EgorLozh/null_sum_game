@@ -3,10 +3,11 @@ from typing import List
 from player import Player
 
 class Game:
-    cost_of_draw = 3
+    cost_of_coop = 3
     cost_of_win = 5
-    cost_of_lose = -1
-    cost_of_life = 1
+    cost_of_lose = 0
+    cost_of_defect = 1
+    cost_of_life = 2
 
     def __init__(self, players: List[Player]):
         self.players = players
@@ -46,9 +47,9 @@ class Game:
         print()
 
     def playGame(self, p1, p2):
-        wins = (Game.cost_of_lose, Game.cost_of_lose)
+        wins = (Game.cost_of_defect, Game.cost_of_defect)
         if p1.play() and p2.play():
-            wins = (Game.cost_of_draw, Game.cost_of_draw)
+            wins = (Game.cost_of_coop, Game.cost_of_coop)
         elif p1.play() and not p2.play():
             wins = (Game.cost_of_lose, Game.cost_of_win)
         elif p2.play() and not p1.play():
@@ -59,7 +60,7 @@ class Game:
 
 
     def updateMemory(self, p1, p2, wins):
-        if wins[0]==wins[1]==self.cost_of_draw:
+        if wins[0]==wins[1]==self.cost_of_coop:
             p1.enemy_memory.append(True)
             p2.enemy_memory.append(True)
             p1.memory.append(True)
